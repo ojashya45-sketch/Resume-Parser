@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Upload Resume | Resume Parser{% endblock %}
+{% block content %}
+<div class="page-heading"><p class="eyebrow">DOCUMENT PROCESSING</p><h1>Upload a resume</h1><p class="muted">Supported formats: PDF and DOCX · Maximum size: 5 MB</p></div>
+<section class="panel upload-panel">
+  <form method="POST" enctype="multipart/form-data" id="uploadForm">
+    <label class="dropzone" for="resume">
+      <span class="upload-icon">↑</span>
+      <strong id="fileLabel">Choose a resume to upload</strong>
+      <span class="muted">Click to browse your device</span>
+      <input type="file" name="resume" id="resume" accept=".pdf,.docx" required>
+    </label>
+    <button class="btn" type="submit">Parse resume</button>
+  </form>
+  <p class="small muted">Your file is processed temporarily and removed from the uploads folder after parsing. Extracted fields are stored in the local SQLite database.</p>
+</section>
+{% endblock %}

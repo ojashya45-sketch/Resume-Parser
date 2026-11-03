@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Candidates | Resume Parser{% endblock %}
+{% block content %}
+<div class="page-heading"><p class="eyebrow">DATABASE</p><h1>Candidate records</h1><p class="muted">Search by candidate name, email or skill.</p></div>
+<form class="search-form" method="GET">
+  <input type="search" name="q" value="{{ query }}" placeholder="Try Python, Rahul or an email address">
+  <button class="btn" type="submit">Search</button>
+  {% if query %}<a class="btn btn-light" href="{{ url_for('candidates') }}">Clear</a>{% endif %}
+</form>
+<section class="panel">
+  {% if candidates %}
+  <div class="table-wrap"><table>
+    <thead><tr><th>Name</th><th>Email</th><th>Skills</th><th>Added</th><th></th></tr></thead>
+    <tbody>
+    {% for c in candidates %}
+      <tr>
+        <td><b>{{ c.name }}</b><small>{{ c.filename }}</small></td>
+        <td>{{ c.email }}</td>
+        <td>{{ c.skills[:90] }}{% if c.skills|length > 90 %}…{% endif %}</td>
+        <td>{{ c.created_at }}</td>
+        <td><a class="text-link" href="{{ url_for('candidate_detail', candidate_id=c.id) }}">View →</a></td>
+      </tr>
+    {% endfor %}
+    </tbody>
+  </table></div>
+  {% else %}
+    <div class="empty"><div class="empty-icon">⌕</div><h3>No candidates found</h3><p class="muted">Upload a resume or try another search.</p><a class="btn" href="{{ url_for('upload') }}">Upload resume</a></div>
+  {% endif %}
+</section>
+{% endblock %}

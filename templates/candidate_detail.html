@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Candidate Profile | Resume Parser{% endblock %}
+{% block content %}
+<div class="page-heading"><p class="eyebrow">EXTRACTED PROFILE</p><h1>{{ candidate.name }}</h1><p class="muted">Source file: {{ candidate.filename }}</p></div>
+<section class="profile-grid">
+  <article class="panel field-card"><span class="field-label">EMAIL</span><strong>{{ candidate.email }}</strong></article>
+  <article class="panel field-card"><span class="field-label">PHONE</span><strong>{{ candidate.phone }}</strong></article>
+</section>
+<section class="panel detail-panel">
+  <h2>Skills</h2><p>{{ candidate.skills }}</p>
+  <hr><h2>Education</h2><p class="preline">{{ candidate.education }}</p>
+  <hr><h2>Experience</h2><p class="preline">{{ candidate.experience }}</p>
+  <p class="notice">Extraction may be incomplete or incorrect. Verify these details against the original resume.</p>
+  <div class="detail-actions">
+    <a class="btn btn-light" href="{{ url_for('candidates') }}">Back to candidates</a>
+    <form method="POST" action="{{ url_for('candidate_delete', candidate_id=candidate.id) }}" onsubmit="return confirmDelete();">
+      <button class="btn btn-danger" type="submit">Delete record</button>
+    </form>
+  </div>
+</section>
+{% endblock %}

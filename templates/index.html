@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Dashboard | Resume Parser{% endblock %}
+{% block content %}
+<section class="hero">
+  <div>
+    <p class="eyebrow">RESUME MANAGEMENT SYSTEM</p>
+    <h1>Candidate dashboard</h1>
+    <p class="muted">Extract, organize and search resume information in one place.</p>
+    <a class="btn" href="{{ url_for('upload') }}">＋ Upload a resume</a>
+  </div>
+  <div class="hero-mark">CV</div>
+</section>
+<section class="stats">
+  <article class="stat-card"><span>Total candidates</span><strong>{{ stats.total }}</strong></article>
+  <article class="stat-card"><span>Profiles with detected skills</span><strong>{{ stats.with_skills }}</strong></article>
+</section>
+<section class="panel">
+  <div class="section-heading">
+    <div><h2>Get started</h2><p class="muted">Choose an action to continue.</p></div>
+  </div>
+  <div class="action-grid">
+    <a class="action-card" href="{{ url_for('upload') }}"><span class="action-icon">↑</span><b>Upload resume</b><small>Parse a PDF or DOCX file</small></a>
+    <a class="action-card" href="{{ url_for('candidates') }}"><span class="action-icon">⌕</span><b>Browse candidates</b><small>Search saved candidate profiles</small></a>
+  </div>
+</section>
+<p class="notice">Review extracted information before relying on it. This demo does not make hiring decisions.</p>
+{% endblock %}
